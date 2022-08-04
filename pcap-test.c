@@ -118,6 +118,10 @@ int main(int argc, char* argv[]) {
 		u_int32_t payload_addr = sizeof(*ethernet)+sizeof(*ip)+tcp->th_off*4;	// payload의 위치는 ethernet header사이즈 + ip header 사이즈 + (data offset * 4)
 		u_int32_t payload_len = header->caplen - payload_addr;	// payload 길이는 패킷 전체 길이 - payload의 위치
 		
+		if (payload_len == 0){
+			printf("No data");
+		}
+
 		for (int i = 0; i < payload_len; i++){	// payload 길이 만큼 출력
 			if (i == 10) break;	// 10 바이트가 넘으면 출력 종료
 			printf("%02x ", packet[payload_addr+i]);
