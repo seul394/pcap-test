@@ -116,7 +116,7 @@ int main(int argc, char* argv[]) {
 		// Payload(Data)
 		printf("payload: ");
 		u_int32_t payload_addr = sizeof(*ethernet)+sizeof(*ip)+tcp->th_off*4;	// payload의 위치는 ethernet header사이즈 + ip header 사이즈 + (data offset * 4)
-		u_int32_t payload_len = header->caplen - payload_addr;	// payload 길이는 패킷 전체 길이 - payload의 위치
+		u_int32_t payload_len = header->caplen - payload_addr;	// payload 길이는 패킷 전체 길이 - payload의 위치 ** 정확하게 하려면 caplen을 사용하면 안된다고 함 **
 		
 		if (payload_len == 0){
 			printf("No data");
